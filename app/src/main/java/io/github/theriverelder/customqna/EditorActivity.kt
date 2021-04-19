@@ -57,6 +57,7 @@ class EditorActivity : AppCompatActivity() {
                 finish()
                 return
             }
+            qnaSet = set
         }
 
         assignViews()
@@ -116,6 +117,7 @@ class EditorActivity : AppCompatActivity() {
         edtHint.addTextChangedListener(MyTextWatcher(false) { editingItem?.hint = it })
 
         pnlEditItem.findViewById<Button>(R.id.btn_deleteQnaItem).setOnClickListener { deleteItemAt(editingItemIndex) }
+        pnlEditItem.findViewById<Button>(R.id.btn_insertNext).setOnClickListener { addNewQnaItem() }
     }
 
     override fun onDestroy() {

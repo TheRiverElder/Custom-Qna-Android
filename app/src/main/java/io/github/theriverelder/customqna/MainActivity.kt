@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.theriverelder.customqna.adaptors.UserProgressListAdaptor
 import io.github.theriverelder.customqna.data.QnaSetInfo
 import io.github.theriverelder.customqna.data.UserProgressInfo
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,18 +31,18 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rclUserProgressList.layoutManager = layoutManager
-        rclUserProgressList.adapter = UserProgressListAdaptor(this, listOf(
-            UserProgressInfo(1, qnaSetInfo, 14, Date(), 20),
-            UserProgressInfo(2, qnaSetInfo, 14, Date(), 20),
-            UserProgressInfo(3, qnaSetInfo, 14, Date(), 20),
-            UserProgressInfo(4, qnaSetInfo, 14, Date(), 20)
-        ))
+        rclUserProgressList.adapter = UserProgressListAdaptor(this, listOf())
     }
 
     fun startProgress(userProgressInfo: UserProgressInfo) {
         val intent = Intent(this, ExerciseActivity::class.java)
         intent.putExtra("upuid", userProgressInfo.upuid)
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun onDestroy() {

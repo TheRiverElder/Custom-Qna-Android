@@ -4,8 +4,8 @@ import java.util.*
 
 data class UserProgressInfo(
     val upuid: Long,
-    val qnaSetInfo: QnaSetInfo?,
-    val completedItemCount: Int,
+    val qsuid: Long,
     var dailyTaskDate: Date,
-    val dailyTaskItemCount: Int
+    val dailyTaskItemCount: Int,
+    val completedItemCount: Int
 )

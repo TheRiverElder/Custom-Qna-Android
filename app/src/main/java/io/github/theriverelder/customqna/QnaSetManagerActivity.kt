@@ -12,6 +12,7 @@ import io.github.theriverelder.customqna.data.QnaSetInfo
 class QnaSetManagerActivity : AppCompatActivity() {
 
     lateinit var rclQnaSetList: RecyclerView
+    lateinit var qnaSetListAdaptor: QnaSetListAdaptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +26,39 @@ class QnaSetManagerActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rclQnaSetList.layoutManager = layoutManager
-        rclQnaSetList.adapter = QnaSetListAdaptor(this, listOf(
-            QnaSetInfo(1, "1.0.1", "aaa", "ddd", 100),
-            QnaSetInfo(2, "1.0.1", "sbvs", "wrvw", 100),
-            QnaSetInfo(3, "1.0.1", "hese", "vrv", 100),
-            QnaSetInfo(4, "1.0.1", "wevtvs", "dd sgssd", 100)
-        ))
+        qnaSetListAdaptor = QnaSetListAdaptor(this, Manifest.qnaSetInfoMap.values.toList())
+        rclQnaSetList.adapter = qnaSetListAdaptor
+    }
+
+    override fun onResume() {
+        super.onResume()
+        qnaSetListAdaptor.data = Manifest.qnaSetInfoMap.values.toList()
+        qnaSetListAdaptor.notifyDataSetChanged()
     }
 
     fun addNewQnaSetAndEdit() {
         val intent = Intent(this, EditorActivity::class.java)
         intent.putExtra("qsuid", 0L)
+        startActivity(intent)
+    }
+
+    fun editQnaSet(qnaSetInfo: QnaSetInfo) {
+        val intent = Intent(this, EditorActivity::class.java)
+        intent.putExtra("qsuid", qnaSetInfo.qsuid)
+        startActivity(intent)
+    }
+
+    fun removeQnaSet(qnaSetInfo: QnaSetInfo) {
+        Manifest.qnaSetInfoMap.remove(qnaSetInfo.qsuid)
+        deleteQnaSet(qnaSetInfo.qsuid)
+        qnaSetListAdaptor.data = Manifest.qnaSetInfoMap.values.toList()
+        qnaSetListAdaptor.notifyDataSetChanged()
+    }
+
+    fun startNewProgress(qnaSetInfo: QnaSetInfo) {
+        val intent = Intent(this, ExerciseActivity::class.java)
+        intent.putExtra("upuid", 0)
+        intent.putExtra("qsuid", qnaSetInfo.qsuid)
         startActivity(intent)
     }
 }

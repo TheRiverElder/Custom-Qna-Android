@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QnaSetManagerActivity">
+    tools:context=".QnaSetManagerActivity"
+    android:background="#E7EAEE">
 
     <LinearLayout
         android:id="@+id/topBar"
@@ -28,6 +29,7 @@
         android:id="@+id/rcl_qnaSetList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

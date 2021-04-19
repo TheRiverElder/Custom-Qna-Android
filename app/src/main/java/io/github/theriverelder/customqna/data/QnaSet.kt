@@ -18,5 +18,5 @@ class QnaSet(
         items.size
     )
 
-    fun createNextItem(): QnaItem = QnaItem(itemCounter++, "Question", "Answer", "hint")
+    fun createNextItem(): QnaItem = QnaItem(itemCounter++, "", "", "")
 }

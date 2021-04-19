@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import io.github.theriverelder.customqna.MainActivity
+import io.github.theriverelder.customqna.Manifest
 import io.github.theriverelder.customqna.R
 import io.github.theriverelder.customqna.data.UserProgressInfo
 import io.github.theriverelder.customqna.utils.toUidString
@@ -26,10 +27,11 @@ class UserProgressListAdaptor(val activity: MainActivity, var data: List<UserPro
 
     override fun onBindViewHolder(holder: UserProgressViewHolder, position: Int) {
         val info = data[position]
-        holder.txtName.text = info.qnaSetInfo?.name ?: "???"
-        holder.txtProgress.text = "${info.completedItemCount} / ${info.qnaSetInfo?.itemsCount ?: "?"}"
+        val qnaSetInfo = Manifest.qnaSetInfoMap[info.qsuid]
+        holder.txtName.text = qnaSetInfo?.name ?: "???"
+        holder.txtProgress.text = "${info.completedItemCount} / ${qnaSetInfo?.itemsCount ?: "?"}"
         holder.txtUpuid.text = info.upuid.toUidString()
-        holder.txtQsuid.text = (info.qnaSetInfo?.qsuid ?: 0L).toUidString()
+        holder.txtQsuid.text = (qnaSetInfo?.qsuid ?: 0L).toUidString()
         holder.itemView.setOnClickListener { activity.startProgress(info) }
     }
 

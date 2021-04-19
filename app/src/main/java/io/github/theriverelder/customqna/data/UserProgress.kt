@@ -1,20 +1,19 @@
 package io.github.theriverelder.customqna.data
 
-import io.github.theriverelder.customqna.Manifest
 import java.util.*
 
 data class UserProgress(
     val upuid: Long,
     val qsuid: Long,
-    val completedQiuidSet: MutableSet<Int>,
     var dailyTaskDate: Date,
-    var dailyTaskQiuidList: List<Int>
+    var dailyTaskQiuidList: List<Int>,
+    val completedQiuidSet: MutableSet<Int>
 ) {
     fun extractInfo() = UserProgressInfo(
         upuid,
-        Manifest.qnaSetInfoMap[qsuid],
-        completedQiuidSet.size,
+        qsuid,
         dailyTaskDate,
-        dailyTaskQiuidList.size
+        dailyTaskQiuidList.size,
+        completedQiuidSet.size
     )
 }

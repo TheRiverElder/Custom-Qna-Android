@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ExerciseActivity">
+    tools:context=".ExerciseActivity"
+    android:background="#E7EAEE">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,6 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/pnl_task"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -57,7 +59,7 @@
             android:layout_height="2dp"
             android:layout_margin="10dp"
             android:layout_weight="0"
-            tools:layout="@layout/fragment_item_separator" />
+            layout="@layout/fragment_item_separator" />
 
         <TextView
             android:id="@+id/txt_answer"
@@ -84,4 +86,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <include
+        layout="@layout/fragment_exercise_complete"
+        android:id="@+id/pnl_exerciseComplete"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"/>
 </LinearLayout>

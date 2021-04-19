@@ -6,7 +6,7 @@ import io.github.theriverelder.customqna.data.QnaSetInfo
 import io.github.theriverelder.customqna.data.UserProgress
 import io.github.theriverelder.customqna.data.UserProgressInfo
 import io.github.theriverelder.customqna.data.serialization.DataSerialization
-import io.github.theriverelder.customqna.data.serialization.DataSerializationVersion_1
+import io.github.theriverelder.customqna.data.serialization.DataSerializationVersion1
 import io.github.theriverelder.customqna.utils.OrderedMap
 import io.github.theriverelder.customqna.utils.toUidString
 import java.io.*
@@ -21,7 +21,7 @@ object Manifest {
 
 var qnaSetDir: File = File(".")
 var userProgressDir: File = File(".")
-val serialization: DataSerialization = DataSerializationVersion_1
+val serialization: DataSerialization = DataSerializationVersion1
 
 fun setup(context: Context) {
     qnaSetDir = File(context.filesDir, "qna_sets")
@@ -106,6 +106,22 @@ fun writeUserProgress(userProgress: UserProgress): Boolean {
     return result
 }
 
+fun deleteQnaSet(qsuid: Long) {
+    val fileName = qsuid.toUidString()
+    val file = File(qnaSetDir, fileName)
+    if (file.exists()) {
+        file.delete()
+    }
+}
+
+fun deleteUserProgress(upuid: Long) {
+    val fileName = upuid.toUidString()
+    val file = File(userProgressDir, fileName)
+    if (file.exists()) {
+        file.delete()
+    }
+}
+
 fun dispose() {
 
 }
@@ -113,9 +129,9 @@ fun dispose() {
 fun createUserProgress(qnaSet: QnaSet): UserProgress = UserProgress(
     System.currentTimeMillis(),
     qnaSet.qsuid,
-    HashSet(),
     Date(0),
-    Collections.emptyList()
+    Collections.emptyList(),
+    HashSet()
 )
 
 fun createQnaSet(): QnaSet = QnaSet(
